@@ -8,27 +8,21 @@ on:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Set up Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.21.3
-
-    - name: Update README.md
-      run: go run update_readme.go
-
-    - name: Commit and Push
-      run: |
-        git config user.email "gilangswandaru27.com"
-        git config user.name "Gilang S"
-        git add README.md
-        git commit -m "Update README.md"
-        git remote add origin_with_token https://$TOKEN_NEW@github.com/glng-swndru/mygreeting.git
-        git push origin_with_token main
-    env:
-      MY_GITHUB_TOKEN: ${{ secrets.TOKEN_NEW }}
-
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.TOKEN_NEW }}
+          fetch-depth: 0
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.21.3'
+      - name: Run update script
+        run: go run update_readme.go
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name 'gilang swandaru'
+          git config --global user.email 'gilangswandaru27@gmail.com'
+          git add README.md
+          git commit -m "Update README with greeting"
+          git push
