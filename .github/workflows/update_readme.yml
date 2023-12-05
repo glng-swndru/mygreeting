@@ -27,7 +27,7 @@ jobs:
         git config user.name "Gilang S"
         git add README.md
         git commit -m "Update README.md"
-        git remote add origin_with_token https://$MY_GITHUB_TOKEN@github.com/glng-swndru/mygreeting.git
+        git remote add origin_with_token https://$TOKEN_NEW@github.com/glng-swndru/mygreeting.git
         git push origin_with_token main
     env:
       MY_GITHUB_TOKEN: ${{ secrets.TOKEN_NEW }}
